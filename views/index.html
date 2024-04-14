@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Prikaz</title>
+</head>
+<body>
+  <h1>Podaci sa servera</h1>
+  <ul id="people-list"></ul>
+
+  <script>
+    fetch('http://localhost:3000/people')
+      .then(response => response.json())
+      .then(data => {
+        const peopleList = document.getElementById('people-list');
+        data.forEach(person => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `
+          Name: ${person.name} - Age: ${person.age}`;
+          peopleList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
+  
+</body>
+</html>
